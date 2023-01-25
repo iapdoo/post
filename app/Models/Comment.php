@@ -11,6 +11,7 @@ class Comment extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'comments';
+    protected $dates = ['deleted_at'];
     protected $fillable = [
         'comment',
         'post_id',

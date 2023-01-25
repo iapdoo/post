@@ -28,7 +28,10 @@ class CommentController extends Controller
     {
 
         try {
-            $comment=Comment::findorfail($id);
+            $comment=Comment::find($id);
+            if (!$comment){
+                return view('errors.404');
+            }
             $comment->delete();
             return redirect()->back();
         }catch (\Exception $exception){

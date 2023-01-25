@@ -28,7 +28,7 @@
                                 <td>
                                     <div style="width:  50px;height:  50px">
                                         @if(!empty($post->image))
-                                            <img  class="card-img-top" src="{{asset($post->image)}}" alt="Card image cap" width="100%" height="100%">
+                                            <img  class="card-img-top" src="{{asset($post->image_for_web)}}" alt="Card image cap" width="100%" height="100%">
                                         @endif
                                     </div>
 

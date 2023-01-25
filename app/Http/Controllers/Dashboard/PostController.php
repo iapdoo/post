@@ -46,7 +46,11 @@ class PostController extends Controller
     public function show($id)
     {
         try {
-            $post=Post::with('comment')->findOrFail($id);
+            $post=Post::with('comment')->find($id);
+            if (!$post){
+                return view('errors.404');
+            }
+
             return view('Dashboard.post.show',compact('post'));
         }catch (\Exception $exception){
             return redirect()->back()->withErrors(['error'=>'something went wrong please try later']);
@@ -57,7 +61,10 @@ class PostController extends Controller
     public function edit($id)
     {
         try {
-            $post=Post::findorfail($id);
+            $post=Post::find($id);
+            if (!$post){
+                return view('errors.404');
+            }
             return view('Dashboard.post.edit',compact('post'));
         }catch (\Exception $exception){
             return redirect()->back()->withErrors(['error'=>'something went wrong please try later']);
@@ -67,7 +74,10 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         try {
-            $post=Post::findorfail($id);
+            $post=Post::find($id);
+            if (!$post){
+                return view('errors.404');
+            }
             $post->update([
             $post->author = auth()->user()->id,
             $post->title =$request->title,
@@ -90,7 +100,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         try {
-            $post=Post::findorfail($id);
+            $post=Post::find($id);
+            if (!$post){
+                return view('errors.404');
+            }
             $deleteImage= Str::after($post->image,'images/') ;
             $deleteImage=base_path('public/images/'.$deleteImage);
             unlink($deleteImage);
